@@ -6,12 +6,12 @@ for my family that include ingrediens already in my household based on our prefe
 
 The first features of this project will include the following:
 
-    1. A database system in mySQL that will have tables of the recipes we use,
+    1. A database system in PostgreSQL that will have tables of the recipes we use,
     ingredients currently in my household. It will also include ways for me to query
     cooking methods, such as crock pots or the stove, to make it easier for me to play
     my meals.
 
-    2. A python user interface.
+    2. A React.js user interface.
 
     3. A way to generate meal plans based on current ingredients, ingredients needed,
     and the method of cooking I would prefer to have, and if we are using meal prep, meals
