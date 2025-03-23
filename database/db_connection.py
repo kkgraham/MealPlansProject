@@ -3,20 +3,19 @@ from psycopg2 import Error
 from psycopg2.extras import RealDictCursor
 from dotenv import load_dotenv
 import os
-import logging
 
 
 def configure():
     load_dotenv()
 
-def db_connection():
+def connect():
     try:
         connection = psycopg2.connect(
             host=os.getenv('pg_host'),
             dbname='mealplans',
             user=os.getenv('pg_user'),
             password=os.getenv('pg_pass'),
-            port=5432
+            port=os.getenv('pg_port')
         )
         print("Connection Successful")
         return connection
@@ -31,7 +30,8 @@ def close_connection(connection):
         print("Connection Successfuly Closed")
 
 def test_connection():
-    connection = db_connection()
+    configure()
+    connection = connect()
 
     if connection:
         try:
@@ -52,7 +52,3 @@ def test_connection():
             close_connection(connection)
 
     return False
-
-if __name__ == "__main__":
-    configure()
-    test_connection()
