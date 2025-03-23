@@ -12,9 +12,9 @@ def configure():
 def db_connection():
     try:
         connection = psycopg2.connect(
-            host='192.168.1.205',
+            host=os.getenv('pg_host'),
             dbname='mealplans',
-            user='annie',
+            user=os.getenv('pg_user'),
             password=os.getenv('pg_pass'),
             port=5432
         )
