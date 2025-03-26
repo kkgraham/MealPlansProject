@@ -9,6 +9,7 @@ def configure():
     load_dotenv()
 
 def connect():
+    configure()
     try:
         connection = psycopg2.connect(
             host=os.getenv('pg_host'),
@@ -24,6 +25,30 @@ def connect():
         print("Error Connecting")
         return None
     
+def execute_query(connection, query, params=None):
+    try:
+        cursor = connection.cursor(cursor_factory=RealDictCursor)
+
+        if params:
+            cursor.execute(query, params)
+        else:
+            cursor.execut(query)
+
+        if query.strip().upper().startswith("SELECT"):
+            return cursor
+        
+        connection.commit()
+        print("Successfully executed query")
+        return True
+
+    except Error as e:
+        print("Failed to execute query")
+        return False
+    
+    finally:
+        if 'cursor' in locals() and not query.strip().upper().startswith('SELECT'):
+            cursor.close()
+
 def close_connection(connection):
     if connection:
         connection.close
